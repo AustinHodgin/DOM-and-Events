@@ -3,8 +3,8 @@ function generate_table() {
   var body = document.getElementsByTagName("body")[0];
  
   // creates a <table> element and a <tbody> element
-  var tbl     = document.createElement("table");
-  var tblBody = document.createElement("tbody");
+  var Table     = document.createElement("table");
+  var Table_Body = document.createElement("tbody");
  
   // creating all cells
   for (var i = 1; i < 5; i++) {
@@ -24,22 +24,22 @@ function generate_table() {
       }
       else{
       var cell = document.createElement("td");
-      var cellText = document.createTextNode( i - 1 + " , " + j  );
+      var cellText = document.createTextNode( i - 1 + " , " + j );
       cell.appendChild(cellText);
       row.appendChild(cell);
      }
     }
  
     // add the row to the end of the table body
-    tblBody.appendChild(row);
+    Table_Body.appendChild(row);
   }
  
   // put the <tbody> in the <table>
-  tbl.appendChild(tblBody);
+  Table.appendChild(Table_Body);
   // appends <table> into <body>
-  body.appendChild(tbl);
-  // sets the border attribute of tbl to 2;
-  tbl.setAttribute("border", "2");
+  body.appendChild(Table);
+  // sets the border attribute of Table to 2;
+  Table.setAttribute("border", "2");
 }
 
 generate_table();
