@@ -38,8 +38,23 @@ function generate_table() {
   Table.appendChild(Table_Body);
   // appends <table> into <body>
   body.appendChild(Table);
-  // sets the border attribute of Table to 2;
+  // sets the border to 2
   Table.setAttribute("border", "2");
 }
 
+
+function move_up(){}
+function move_down(){}
+function move_left(){}
+function move_right(){}
+function mark(){}
+
+
+
+
 generate_table();
+
+var up_button = document.createElement("BUTTON");
+var up_text = document.createTextNode("up");
+up_button.appendChild(up_text);
+document.body.appendChild(up_button);
