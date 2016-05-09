@@ -1,3 +1,5 @@
+//With help from: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces
+
 function generate_table() {  // get the reference for the body
      
     var body = document.getElementsByTagName("body")[0];   // creates a <table> element and a <tbody> element
@@ -11,12 +13,13 @@ function generate_table() {  // get the reference for the body
         for (var j = 1; j < 5; j++) {      // Create a <td> element and a text node, make the text
                   // node the contents of the <td>, and put the <td> at
                   // the end of the table row
+            //if i == 1 it will create the header row.
             if (i == 1) {
                 var cell = document.createElement("th");     
                 var cellText = document.createTextNode("Header " + j);     
                 cell.appendChild(cellText);     
                 row.appendChild(cell);
-
+            //else it will create the normal rows
             } else {     
                 var cell = document.createElement("td");     
                 var cellText = document.createTextNode(i - 1 + " , " + j);     
@@ -31,7 +34,7 @@ function generate_table() {  // get the reference for the body
     Table.appendChild(Table_Body);  // appends <table> into <body>
      
     body.appendChild(Table);  // sets the border to 2
-     
+     //sets the borderWidth to 1 pixel
     Table.setAttribute("border", "1px");
 }
 
@@ -77,21 +80,25 @@ function generate_buttons() {
 
 
 function move_up() {
-    current = document.getElementById("selected");
-    if (current.rowIndex == 1) {
+    current = document.getElementById("selected"); //sets current equal to the slected element
+    //if the slected is on the top row it wont move up
+    if (current.parentNode.rowIndex <= 1) {
+
         return;
     }
-    var temp = current.cellIndex;
-    current.style.borderWidth = "1px";
-    current.removeAttribute("id");
+
+    var temp = current.cellIndex; //sets a temp veriable to the cell index of the col to be used later
+    current.style.borderWidth = "1px"; //sets the border back to normal
+    current.removeAttribute("id"); //removes the ID fro m the slected element
     current = current.parentNode;
     current = current.previousElementSibling;
     current = current.firstElementChild;
+    //moves the slected over the ammount of spaces over
     for (var i = 0; i < temp; i++) {
         current = current.nextElementSibling;
     }
-    current.style.borderWidth = "4px";
-    current.id = "selected";
+    current.style.borderWidth = "4px"; //sets the new pixel width of the slected
+    current.id = "selected"; //gives that cell the the slected id
 
 
 
@@ -99,11 +106,13 @@ function move_up() {
 
 function move_down() {
 
-    current = document.getElementById("selected");
-    if (current.rowIndex == 1) {
+    current = document.getElementById("selected");  //sets current equal to the slected element
+      //if the slected is on the bottom row it wont move udown
+    if (current.parentNode.rowIndex >= 3) {
+
         return;
     }
-    var temp = current.cellIndex;
+    var temp = current.cellIndex; //sets a temp veriable to the cell index of the col to be used later
     current.style.borderWidth = "1px";
     current.removeAttribute("id");
     current = current.parentNode;
@@ -119,6 +128,7 @@ function move_down() {
 
 function move_left() {
     current = document.getElementById("selected");
+  //if the cell inded is equal to 0 it wont move left anymore
     if (current.cellIndex == 0) {
         return;
 
@@ -134,6 +144,7 @@ function move_left() {
 
 function move_right() {
     current = document.getElementById("selected");
+    //if the cell index is equal to 3 it wont move right anymore
     if (current.cellIndex == 3) {
         return;
 
@@ -161,7 +172,7 @@ function mark() {
 generate_table();
 generate_buttons();
 
-//hightlights
+//selects the first element in the top left of the
 
 var current = document.getElementsByTagName("td")[0];
 current.id = "selected";
